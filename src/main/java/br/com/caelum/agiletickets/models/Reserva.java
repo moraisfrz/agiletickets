@@ -16,4 +16,30 @@ public class Reserva {
 
 	@ManyToOne
 	private Espetaculo espetaculo;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCadeira() {
+		return cadeira;
+	}
+
+	public void setCadeira(String cadeira) {
+		this.cadeira = cadeira;
+	}
+
+	public Espetaculo getEspetaculo() {
+		return espetaculo;
+	}
+
+	public void setEspetaculo(Espetaculo espetaculo) {
+		this.espetaculo = espetaculo;
+	}
+	
+	
 }
