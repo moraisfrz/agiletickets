@@ -93,4 +93,12 @@ public class Sessao {
 	public boolean podeReservar(Integer numeroDeIngressos) {
 		return getIngressosDisponiveis() >= numeroDeIngressos;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((inicio == null) ? 0 : inicio.hashCode());
+		return result;
+	}
 }

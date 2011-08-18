@@ -12,8 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.joda.time.Days;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.joda.time.Weeks;
 
 @Entity
 public class Espetaculo {
@@ -29,7 +31,7 @@ public class Espetaculo {
 	@Enumerated(EnumType.STRING)
 	private TipoDeEspetaculo tipo;
 
-	@OneToMany(mappedBy="espetaculo")
+	@OneToMany(mappedBy = "espetaculo")
 	private List<Sessao> sessoes = newArrayList();
 
 	@ManyToOne
@@ -79,8 +81,31 @@ public class Espetaculo {
 		return estabelecimento;
 	}
 
-	public List<Sessao> criaSessoes(LocalDate inicio, LocalDate fim, LocalTime horario, Periodicidade periodicidade) {
-		return null;
+	public void criaSessoes(LocalDate inicio, LocalDate fim,
+			LocalTime horario, Periodicidade periodicidade) {
+
+		if (periodicidade.equals(Periodicidade.DIARIA)) {
+			Days dias = Days.daysBetween(inicio, fim);
+
+			for (Integer i = 0; i <= dias.getDays(); i++) {
+
+				Sessao s = new Sessao();
+				s.setInicio(inicio.plusDays(i).toDateTime(horario));
+
+				sessoes.add(s);
+			}
+		} else {
+			Weeks semanas = Weeks.weeksBetween(inicio, fim);
+
+			for (Integer i = 0; i <= semanas.getWeeks(); i++) {
+
+				Sessao s = new Sessao();
+				s.setInicio(inicio.plusWeeks(i).toDateTime(horario));
+
+				sessoes.add(s);
+			}
+		}
+
 	}
 
 }
