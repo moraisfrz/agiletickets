@@ -3,11 +3,11 @@ package br.com.caelum.agiletickets.models;
 import org.junit.Assert;
 import org.junit.Test;
 
-class SessaoTest {
+public class SessaoTest {
 
 	private Sessao sessao;
 	
-	public void setup(){
+	public SessaoTest() {
 		this.sessao = new Sessao();
 	}
 	
