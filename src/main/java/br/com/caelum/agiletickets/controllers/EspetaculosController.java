@@ -108,11 +108,11 @@ public class EspetaculosController {
 	public void cadastraSessoes(Long espetaculoId, LocalDate inicio, LocalDate fim, LocalTime horario, Periodicidade periodicidade) {
 		espetaculo = carregaEspetaculo(espetaculoId);
 
-		List<Sessao> sessoes = espetaculo.criaSessoes(inicio, fim, horario, periodicidade);
+		espetaculo.criaSessoes(inicio, fim, horario, periodicidade);
+		
+		agenda.agende(espetaculo.getSessoes());
 
-		agenda.agende(sessoes);
-
-		result.include("message", sessoes.size() + " sessões criadas com sucesso");
+		result.include("message", espetaculo.getSessoes().size() + " sessões criadas com sucesso");
 		result.redirectTo(this).lista();
 	}
 
